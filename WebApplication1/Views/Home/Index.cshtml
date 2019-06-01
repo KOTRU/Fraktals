@@ -1,5 +1,110 @@
 ﻿@{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("frm").onsubmit = validate_form;
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+        function validate_form() {
+
+
+            if (!isNumeric(document.getElementById("CRe").value.replace(",", "."))) {
+                alert("Ошибка в поле CRe. CRe - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+               document.getElementById("CRe").value= document.getElementById("CRe").value.replace(".", ",");
+            }
+            if (!isNumeric(document.getElementById("CIm").value.replace(",", "."))) {
+                alert("Ошибка в поле CIm. CIm - должно быть числом с плавующей запятой");
+                return false;
+            }
+            {
+               document.getElementById("CIm").value= document.getElementById("CIm").value.replace(".", ",");
+            }
+
+            if (!isNumeric(document.getElementById("Zoom").value.replace(",", "."))) {
+                alert("Ошибка в поле Zoom. Zoom - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+               document.getElementById("Zoom").value= document.getElementById("Zoom").value.replace(".", ",");
+            }
+            if (!isNumeric(document.getElementById("MoveX").value.replace(",", "."))) {
+                alert("Ошибка в поле MoveX. MoveX - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+               document.getElementById("MoveX").value= document.getElementById("MoveX").value.replace(".", ",");
+            }
+            if (!isNumeric(document.getElementById("MoveY").value.replace(",", "."))) {
+                alert("Ошибка в поле MoveY. MoveY - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+               document.getElementById("MoveY").value= document.getElementById("MoveY").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("MaxIterations").value.replace(",", "."))) || (document.getElementById("MaxIterations").value - Math.floor(document.getElementById("MaxIterations").value) != 0)) {
+                alert("Ошибка в поле MaxIterations. MaxIterations - должно быть целым числом, и больше 0");
+                return false;
+            }
+            else {
+               document.getElementById("MaxIterations").value= document.getElementById("MaxIterations").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("Width").value.replace(",", "."))) || (document.getElementById("Width").value - Math.floor(document.getElementById("Width").value) != 0)) {
+                alert("Ошибка в поле Width. Width - должно быть целым числом, и больше 0");
+                return false;
+            }
+            else {
+               document.getElementById("Width").value= document.getElementById("Width").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("Height").value.replace(",", "."))) || (document.getElementById("Height").value - Math.floor(document.getElementById("Height").value) != 0)) {
+                alert("Ошибка в поле Height. Height - должно быть целым числом, и больше 0");
+                return false;
+            }
+            else {
+               document.getElementById("Height").value= document.getElementById("Height").value.replace(".", ",");
+            }
+            return true;
+        }
+    });
+</script>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "frm" }))
+{
+    <div class="block1" id="frm">
+        <p>Введите CRe: </p>
+        @Html.TextBox("CRe", "")
+        <p>Введите CIm :</p>
+        @Html.TextBox("CIm", "")
+        <p>Введите Zoom :</p>
+        @Html.TextBox("Zoom", "")
+        <p>Введите MoveX :</p>
+        @Html.TextBox("MoveX", "")
+        <p>Введите MoveY :</p>
+        @Html.TextBox("MoveY", "")
+        <p>Введите MaxIterations :</p>
+        @Html.TextBox("MaxIterations", "")
+        <p>Введите Width :</p>
+        @Html.TextBox("Width", "")
+        <p>Введите Height :</p>
+        @Html.TextBox("Height", "")
+        <p><input type="submit" value="Отправить" /></p>
+    </div>
+    <div class="block2">
+        <img src="@ViewData["Head"]" align="middle" style=" border: 8px solid #ffffff;" />
+    </div>
 }
 
-<img src="@Url.Action("GetImage", "Home")" />
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+

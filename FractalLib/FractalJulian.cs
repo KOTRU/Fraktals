@@ -83,7 +83,7 @@ namespace FractalLib
                     }
 
                     //определяем цвета
-                    bmp.SetPixel(x, y, Color.FromArgb(255, (i * 9) % 255, 0, (i * 9) % 255));
+                    bmp.SetPixel(x, y, Color.FromArgb((i * 9) % 255, (i * 9) % 255, 0, (i * 9) % 255));
 
                 }
             }

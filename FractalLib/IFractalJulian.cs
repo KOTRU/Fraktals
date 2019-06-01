@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FractalLib
 {
-    interface IFractalJulian: IFractal
+    public interface IFractalJulian: IFractal
     {
         Complex C { get; set; }
     }
