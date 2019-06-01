@@ -43,10 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComlexStr.cs" />
+    <Compile Include="FractalCantor.cs" />
     <Compile Include="FractalJulian.cs" />
     <Compile Include="IImageBase.cs" />
     <Compile Include="IFractal.cs" />
     <Compile Include="IFractalJulian.cs" />
+    <Compile Include="IFractalCantor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

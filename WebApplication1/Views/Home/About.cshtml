@@ -1,7 +1,120 @@
 ﻿@{
     ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-<p>Use this area to provide additional information.</p>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("frm").onsubmit = validate_form;
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+        function validate_form() {
+
+
+            if ((!isNumeric(document.getElementById("Length").value.replace(",", "."))) || (document.getElementById("Length").value - Math.floor(document.getElementById("Length").value) != 0) || (document.getElementById("Length").value.replace(",", ".") < 0)) {
+                alert("Ошибка в поле Length. Length - должно быть числом с плавующей запятой и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("Length").value = document.getElementById("Length").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("RecHeight").value.replace(",", "."))) || (document.getElementById("RecHeight").value - Math.floor(document.getElementById("RecHeight").value) != 0) || (document.getElementById("RecHeight").value.replace(",", ".") < 0)) {
+                alert("Ошибка в поле RecHeight. RecHeight - должно быть числом с плавующей запятой и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("RecHeight").value = document.getElementById("RecHeight").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("RecMargin").value.replace(",", "."))) || (document.getElementById("RecMargin").value - Math.floor(document.getElementById("RecMargin").value) != 0) || (document.getElementById("RecMargin").value.replace(",", ".") < 0)) {
+                alert("Ошибка в поле RecMargin. RecMargin - должно быть числом с плавующей запятой и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("RecMargin").value = document.getElementById("RecMargin").value.replace(".", ",");
+            }
+
+
+            if (!isNumeric(document.getElementById("Zoom").value.replace(",", "."))) {
+                alert("Ошибка в поле Zoom. Zoom - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+                document.getElementById("Zoom").value = document.getElementById("Zoom").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("MoveX").value.replace(",", ".")))||(((document.getElementById("Width").value-document.getElementById("Length").value)/2< document.getElementById("MoveX").value))) {
+                alert("Ошибка в поле MoveX. MoveX - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+                document.getElementById("MoveX").value = document.getElementById("MoveX").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("MoveY").value.replace(",", ".")))) {
+                alert("Ошибка в поле MoveY. MoveY - должно быть числом с плавующей запятой");
+                return false;
+            }
+            else {
+                document.getElementById("MoveY").value = document.getElementById("MoveY").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("MaxIterations").value.replace(",", "."))) || (document.getElementById("MaxIterations").value - Math.floor(document.getElementById("MaxIterations").value) != 0)) {
+                alert("Ошибка в поле MaxIterations. MaxIterations - должно быть целым числом и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("MaxIterations").value = document.getElementById("MaxIterations").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("Width").value.replace(",", "."))) || (document.getElementById("Width").value - Math.floor(document.getElementById("Width").value) != 0)) {
+                alert("Ошибка в поле Width. Width - должно быть целым числом и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("Width").value = document.getElementById("Width").value.replace(".", ",");
+            }
+            if ((!isNumeric(document.getElementById("Height").value.replace(",", "."))) || (document.getElementById("Height").value - Math.floor(document.getElementById("Height").value) != 0)) {
+                alert("Ошибка в поле Height. Height - должно быть целым числом и больше 0");
+                return false;
+            }
+            else {
+                document.getElementById("Height").value = document.getElementById("Height").value.replace(".", ",");
+            }
+            return true;
+        }
+    });
+</script>
+@using (Html.BeginForm("About", "Home", FormMethod.Post, new { id = "frm" }))
+{
+    <div class="block1" id="frm">
+        <p>Введите Length: </p>
+        @Html.TextBox("Length", "")
+        <p>Введите RecHeight: </p>
+        @Html.TextBox("RecHeight", "")
+        <p>Введите RecMargin: </p>
+        @Html.TextBox("RecMargin", "")
+        <p>Введите Zoom :</p>
+        @Html.TextBox("Zoom", "")
+        <p>Введите MoveX :</p>
+        @Html.TextBox("MoveX", "")
+        <p>Введите MoveY :</p>
+        @Html.TextBox("MoveY", "")
+        <p>Введите MaxIterations :</p>
+        @Html.TextBox("MaxIterations", "")
+        <p>Введите Width :</p>
+        @Html.TextBox("Width", "")
+        <p>Введите Height :</p>
+        @Html.TextBox("Height", "")
+        <p><input type="submit" value="Отправить" /></p>
+    </div>
+    <div class="block2">
+        <img src="@ViewData["Head1"]" align="middle" style=" border: 8px solid #ffffff;" />
+    </div>
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
